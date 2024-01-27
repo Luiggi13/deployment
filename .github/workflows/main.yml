@@ -15,13 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     # if: "contains(github.event.head_commit.message, 'to deploy')"
     steps:
-      - uses: actions/checkout@v4
+    - uses: 'actions/checkout@v4'
 
-      - name: Google Auth
-        id: auth
-      - uses: 'google-github-actions/auth@v2'
-        with:
-          credentials_json: '${{ secrets.GCP_SA_KEY_JSON }}'
+    - uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
       # Setup gcloud CLI
       # - uses: GoogleCloudPlatform/github-actions/setup-gcloud@v2
       #   with:
