@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import { AppModule } from '@/app.module';
+import { HealthStatus } from '@/types/health.type';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -19,6 +20,6 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
-      .expect({ status: 'Subido desde pr de main' });
+      .expect({ status: HealthStatus.AVAILABLE });
   });
 });

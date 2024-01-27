@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { Health, HealthStatus } from '@/types';
+
 @Injectable()
 export class AppService {
-  getHello(): { status: string } {
-    return { status: 'Subido desde pr de main' };
+  getAvailability(): Health {
+    return { status: HealthStatus.AVAILABLE };
   }
 }
