@@ -16,7 +16,9 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "{"status":version}"', () => {
-      expect(appController.getHello()).toBe({ status: '0.0.1' });
+      expect(appController.getHello()).toStrictEqual({
+        status: 'Subido desde pr de main',
+      });
     });
   });
 });

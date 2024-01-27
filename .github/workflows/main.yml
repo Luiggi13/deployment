@@ -35,25 +35,25 @@ jobs:
         run: gcloud builds submit --tag gcr.io/$PROJECT_ID/$APP_ID:$GITHUB_SHA
 
       - name: Deploy
-        run: gcloud run deploy $APP_ID --image gcr.io/$PROJECT_ID/$APP_ID:$GITHUB_SHA --platform managed --region $RUN_REGION --allow-unauthenticated --set-env-vars POSTGRES_HOST=${{ secrets.POSTGRES_HOST }},POSTGRES_PORT=${{ secrets.POSTGRES_PORT }},POSTGRES_USER=${{ secrets.POSTGRES_USER }},POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }},POSTGRES_DB=${{ secrets.POSTGRES_DB }},VERSION=${{ secrets.VERSION }}
-  notify:
-      name: Discord Notification
-      runs-on: ubuntu-latest
-      needs: # make sure the notification is sent AFTER the jobs you want included have completed
-        - deploy
-      if: ${{ always() }} # You always want to be notified: success, failure, or cancelled
+        run: gcloud run deploy $APP_ID --image gcr.io/$PROJECT_ID/$APP_ID:$GITHUB_SHA --platform managed --region $RUN_REGION --allow-unauthenticated --set-env-vars POSTGRES_HOST=${{ secrets.POSTGRES_HOST }},POSTGRES_PORT=${{ secrets.POSTGRES_PORT }},POSTGRES_USER=${{ secrets.POSTGRES_USER }},POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }},POSTGRES_DB=${{ secrets.POSTGRES_DB }},VERSION=${{ secrets.VERSION }},NODE_ENV=${{ secrets.NODE_ENV }}
+  # notify:
+  #     name: Discord Notification
+  #     runs-on: ubuntu-latest
+  #     needs: # make sure the notification is sent AFTER the jobs you want included have completed
+  #       - deploy
+  #     if: ${{ always() }} # You always want to be notified: success, failure, or cancelled
 
-      steps:
-        - name: Notify
-          uses: nobrayner/discord-webhook@v1
-          with:
-            github-token: ${{ github.token }}
-            discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
-            username: 'Deploy agent'
-            avatar-url: 'https://www.kaurispirit.com/wp-content/uploads/2020/03/Notify-App-Logo-2019.png'
-            title: '${{ github.workflow }}: {{STATUS}}'
-            description: '${{ github.event_name }} trigged this {{STATUS}}!'
-            include-details: 'false'
-            color-success: '#4287f5'
-            color-failure: 'eb4034'
-            color-cancelled: '0x42daf5'
+  #     steps:
+  #       - name: Notify
+  #         uses: nobrayner/discord-webhook@v1
+  #         with:
+  #           github-token: ${{ github.token }}
+  #           discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
+  #           username: 'Deploy agent'
+  #           avatar-url: 'https://www.kaurispirit.com/wp-content/uploads/2020/03/Notify-App-Logo-2019.png'
+  #           title: '${{ github.workflow }}: {{STATUS}}'
+  #           description: '${{ github.event_name }} trigged this {{STATUS}}!'
+  #           include-details: 'false'
+  #           color-success: '#4287f5'
+  #           color-failure: 'eb4034'
+  #           color-cancelled: '0x42daf5'
