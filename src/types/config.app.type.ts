@@ -6,14 +6,6 @@ export type ConfigApp = {
   limit: number;
 };
 
-export type ConfigAppRedis = {
-  enabled: boolean;
-  host: string;
-  port: number;
-  username: string;
-  password: string;
-};
-
 export type ConfigAppPostgres = {
   host: string;
   port: number;
