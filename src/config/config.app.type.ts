@@ -1,5 +1,6 @@
 export type ConfigApp = {
   apiPort: number;
+  postgres: ConfigAppPostgres;
 };
 
 export type ConfigAppRedis = {
@@ -11,7 +12,6 @@ export type ConfigAppRedis = {
 };
 
 export type ConfigAppPostgres = {
-  type: 'postgres' | 'mongodb' | 'mssql' | 'mysql' | 'sqlite' | 'cockroachdb';
   host: string;
   port: number;
   username: string;

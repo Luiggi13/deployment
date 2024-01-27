@@ -11,7 +11,6 @@ async function bootstrap() {
     methods: ['*'],
     allowedHeaders: ['*'],
   });
-  console.log(configService.get<number>('PORT'));
   await app.listen(configService.get<number>('PORT') || 3000);
 }
 bootstrap();
