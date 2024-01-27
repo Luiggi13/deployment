@@ -10,5 +10,6 @@ export const configApp = (): ConfigApp => {
       password: process.env.POSTGRES_PASSWORD || '',
       database: process.env.POSTGRES_DB || '',
     },
+    version: '0.0.1',
   };
 };

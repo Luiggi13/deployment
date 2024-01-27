@@ -1,6 +1,7 @@
 export type ConfigApp = {
   apiPort: number;
   postgres: ConfigAppPostgres;
+  version: string;
 };
 
 export type ConfigAppRedis = {
