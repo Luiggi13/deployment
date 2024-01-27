@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - psql_dev:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_USER}
+      - POSTGRES_USER=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes: 
+      - cache:/data
+volumes:
+  cache:
+    driver: local
+  psql_dev:
+    driver: local
