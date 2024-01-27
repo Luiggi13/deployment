@@ -10,7 +10,7 @@ COPY package*.json ./
 RUN npm install
 
 # Bundle app source
-COPY . .
+COPY . ./
 
 # Copy the .env and .env.development files
 # COPY .env .env.local ./
@@ -18,9 +18,7 @@ COPY . .
 # Creates a "dist" folder with the production build
 RUN npm run build
 
-# Expose the port on which the app will run
-EXPOSE 3000
 
 # Start the server using the production build
 # CMD ["npm", "run", "start:prod"]
-CMD [ "node", "dist/main.js" ]
+CMD [ "npm", "run", "start:prod" ]
