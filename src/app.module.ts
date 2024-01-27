@@ -10,6 +10,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD, APP_FILTER } from '@nestjs/core';
 import { RateLimitExceptionFilter } from '@/core/filters/throttler.filter';
 import { CoreModule } from '@/core/core.module';
+import { ApiModule } from '@/api/api.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { CoreModule } from '@/core/core.module';
       },
     ]),
     CoreModule,
+    ApiModule,
   ],
   controllers: [AppController],
   providers: [
