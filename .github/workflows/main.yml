@@ -15,17 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     # if: "contains(github.event.head_commit.message, 'to deploy')"
     steps:
-    - uses: 'actions/checkout@v4'
+      - uses: actions/checkout@v4
 
-    - uses: 'google-github-actions/auth@v2'
-      with:
-        credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
       # Setup gcloud CLI
-      # - uses: GoogleCloudPlatform/github-actions/setup-gcloud@v2
-      #   with:
-      #     version: "290.0.1"
-      #     service_account_key: ${{ secrets.GCP_SA_KEY_JSON }}
-      #     project_id: ${{ secrets.GCP_PROJECT_ID }}
+      - uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
 
       # Build and push image to Google Container Registry
       - name: Build
