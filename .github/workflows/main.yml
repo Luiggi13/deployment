@@ -1,9 +1,8 @@
 # .github/workflows/deploy.yml
 name: Deploy backend to Cloud Run
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    branches: [ "main" ]
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   APP_ID: nest
