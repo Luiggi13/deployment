@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { configApp } from './config/config.app';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -11,6 +13,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       isGlobal: true,
       load: [configApp],
       envFilePath: ['.env'],
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'swagger-static'),
+      serveRoot: process.env.NODE_ENV === 'development' ? '/' : '/swagger',
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
