@@ -1,4 +1,4 @@
-import { ConfigStrings } from '../types/config.strings.type';
+import { ConfigStrings } from '@/types/config.strings.type';
 
 export const configStrings = (): ConfigStrings => {
   return {
