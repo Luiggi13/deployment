@@ -1,4 +1,4 @@
-import { ConfigApp } from './config.app.type';
+import { ConfigApp } from '../types/config.app.type';
 
 export const configApp = (): ConfigApp => {
   return {
