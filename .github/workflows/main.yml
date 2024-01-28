@@ -1,5 +1,4 @@
-name: Tests CI
-
+name: Main file
 on:
   pull_request:
     branches:
@@ -9,39 +8,54 @@ on:
       - 'main'
 
 jobs:
-  unit_tests:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  main:
+    uses: Luiggi13/deployment/.github/workflows/steps.yaml@main
+    with:
+      environment: "dev"
+# name: Tests CI
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+# on:
+#   pull_request:
+#     branches:
+#       - 'main'
+#   push:
+#     branches:
+#       - 'main'
 
-      - name: 📥 Install Dependencies
-        run: npm install
+# jobs:
+#   unit_tests:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
 
-      - name: 📥 Set up .env
-        run: echo "${{ secrets.ENV_FILE }}" > .env
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v3
 
-      - name: 🧪 UNIT 🧪
-        run: npm run test:ci
+#       - name: 📥 Install Dependencies
+#         run: npm install
 
-  e2e_tests:
-    runs-on: ubuntu-latest
-    needs: [unit_tests]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+#       - name: 📥 Set up .env
+#         run: echo "${{ secrets.ENV_FILE }}" > .env
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+#       - name: 🧪 UNIT 🧪
+#         run: npm run test:ci
 
-      - name: 📥 Install Dependencies
-        run: npm install
+#   e2e_tests:
+#     runs-on: ubuntu-latest
+#     needs: [unit_tests]
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
 
-      - name: 📥 Set up .env
-        run: echo "${{ secrets.ENV_FILE }}" > .env
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v3
 
-      - name: 🧪 E2E 🧪
-        run: npm run test:e2e
+#       - name: 📥 Install Dependencies
+#         run: npm install
+
+#       - name: 📥 Set up .env
+#         run: echo "${{ secrets.ENV_FILE }}" > .env
+
+#       - name: 🧪 E2E 🧪
+#         run: npm run test:e2e
