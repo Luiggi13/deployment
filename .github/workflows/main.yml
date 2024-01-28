@@ -22,7 +22,7 @@ jobs:
       steps:
         - name: Obtener información de la rama
           run: |
-            echo "${{inputs.environment}}"
+            echo "${GITHUB_REF#refs/heads/}"
 # name: Tests CI
 
 # on:
