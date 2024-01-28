@@ -21,18 +21,18 @@ jobs:
       needs: [unit,e2e]
       steps:
         - name: Obtener información de la rama
-        run: |
-          case "${GITHUB_REF#refs/heads/}" in
-            "main")
-              echo "production"
-              ;;
-            "qa")
-              echo "qa"
-              ;;
-            "development")
-              echo "development"
-              ;;
-            *)
-              echo "Otro entorno"
-              ;;
-          esac
+          run: |
+            case "${GITHUB_REF#refs/heads/}" in
+              "main")
+                echo "production"
+                ;;
+              "qa")
+                echo "qa"
+                ;;
+              "development")
+                echo "development"
+                ;;
+              *)
+                echo "Otro entorno"
+                ;;
+            esac
