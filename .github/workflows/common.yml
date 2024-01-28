@@ -1,6 +1,6 @@
 name: Common Steps
 
-on: []
+on: []  # No necesitas eventos en este archivo
 
 jobs:
   common_steps:
