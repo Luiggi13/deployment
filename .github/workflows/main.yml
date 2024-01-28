@@ -8,18 +8,14 @@ on:
       - 'main'
 
 jobs:
-  example-job:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Obtener información de la rama
-      run: |
-        BRANCH_NAME=${GITHUB_REF#refs/heads/}
-        echo "La acción se ejecutó desde la rama: $BRANCH_NAME"
-  main:
-    uses: Luiggi13/deployment/.github/workflows/steps.yaml@main
+  unit:
+    uses: Luiggi13/deployment/.github/workflows/unit.yaml@main
     with:
-      environment: "dev"
+      environment: ${GITHUB_REF#refs/heads/}
+  unit:
+    uses: Luiggi13/deployment/.github/workflows/e2e.yaml@main
+    with:
+      environment: ${GITHUB_REF#refs/heads/}
 # name: Tests CI
 
 # on:
