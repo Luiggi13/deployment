@@ -21,52 +21,18 @@ jobs:
       needs: [unit,e2e]
       steps:
         - name: Obtener información de la rama
-          run: |
-            echo "${GITHUB_REF#refs/heads/}"
-# name: Tests CI
-
-# on:
-#   pull_request:
-#     branches:
-#       - 'main'
-#   push:
-#     branches:
-#       - 'main'
-
-# jobs:
-#   unit_tests:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3
-
-#       - name: Set up Node.js
-#         uses: actions/setup-node@v3
-
-#       - name: 📥 Install Dependencies
-#         run: npm install
-
-#       - name: 📥 Set up .env
-#         run: echo "${{ secrets.ENV_FILE }}" > .env
-
-#       - name: 🧪 UNIT 🧪
-#         run: npm run test:ci
-
-#   e2e_tests:
-#     runs-on: ubuntu-latest
-#     needs: [unit_tests]
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3
-
-#       - name: Set up Node.js
-#         uses: actions/setup-node@v3
-
-#       - name: 📥 Install Dependencies
-#         run: npm install
-
-#       - name: 📥 Set up .env
-#         run: echo "${{ secrets.ENV_FILE }}" > .env
-
-#       - name: 🧪 E2E 🧪
-#         run: npm run test:e2e
+        run: |
+          case "${GITHUB_REF#refs/heads/}" in
+            "main")
+              echo "production"
+              ;;
+            "qa")
+              echo "qa"
+              ;;
+            "development")
+              echo "development"
+              ;;
+            *)
+              echo "Otro entorno"
+              ;;
+          esac
