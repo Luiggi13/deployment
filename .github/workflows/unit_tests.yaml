@@ -1,5 +1,17 @@
-extends: ./.github/common.yml
+name: Unit Tests
 
-steps:
-  - name: 🧪 UNIT TEST 🧪
-    run: npm run test:ci
+on:
+  pull_request:
+    branches:
+      - 'main'
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  unit_tests:
+    runs-on: ubuntu-latest
+    needs: common_steps
+    steps:
+      - name: 🧪 UNIT TEST 🧪
+        run: npm run test:ci

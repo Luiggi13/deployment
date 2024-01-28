@@ -1,12 +1,19 @@
-steps:
-  - name: Checkout code
-    uses: actions/checkout@v3
+name: Common Steps
 
-  - name: Set up Node.js
-    uses: actions/setup-node@v3
+on: []
 
-  - name: 📥 Install Dependencies
-    run: npm install
+jobs:
+  common_steps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-  - name: 📥 Set up .env
-    run: echo "${{ secrets.ENV_FILE }}" > .env
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+
+      - name: 📥 Install Dependencies
+        run: npm install
+
+      - name: 📥 Set up .env
+        run: echo "${{ secrets.ENV_FILE }}" > .env
