@@ -1,4 +1,4 @@
-name: 🧪 E2E 🧪
+name: 🧪 E2E TEST 🧪
 
 on:
   workflow_call:
@@ -10,7 +10,6 @@ on:
 jobs:
   e2e_tests:
     runs-on: ubuntu-latest
-    needs: [unit_tests]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -24,7 +23,7 @@ jobs:
       - name: 📥 Set up .env
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
-          echo "${{ inputs.environment }}" >> .env
+          echo "BRANCH=${{ inputs.environment }}" >> .env
 
       - name: 🧪 E2E 🧪
         run: npm run test:e2e
