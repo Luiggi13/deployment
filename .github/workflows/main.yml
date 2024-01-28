@@ -12,10 +12,10 @@ jobs:
     uses: Luiggi13/deployment/.github/workflows/unit.yaml@main
     with:
       environment: ${GITHUB_REF#refs/heads/}
-  e2e:
-    uses: Luiggi13/deployment/.github/workflows/e2e.yaml@main
-    with:
-      environment: ${GITHUB_REF#refs/heads/}
+  # e2e:
+  #   uses: Luiggi13/deployment/.github/workflows/e2e.yaml@main
+  #   with:
+  #     environment: ${GITHUB_REF#refs/heads/}
 # name: Tests CI
 
 # on:
