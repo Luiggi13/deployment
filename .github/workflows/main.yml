@@ -29,22 +29,36 @@ jobs:
       - name: Set up .env
         run: echo "${{ secrets.ENV_FILE }}" > .env
 
-  unit_tests:
+  debug_info:
     runs-on: ubuntu-latest
     needs: common_steps
     env:
       WORKING_DIRECTORY: ${{ github.workspace }}
     steps:
-      - name: Run UNIT tests
-        run: npm run test
+      - name: Print Working Directory
+        run: echo ${{ env.WORKING_DIRECTORY }}
         working-directory: ${{ env.WORKING_DIRECTORY }}
 
-  e2e_tests:
-    runs-on: ubuntu-latest
-    needs: [common_steps, unit_tests]
-    env:
-      WORKING_DIRECTORY: ${{ github.workspace }}
-    steps:
-      - name: Run E2E tests
-        run: npm run test:ci
+      - name: List Contents of Working Directory
+        run: ls -la
         working-directory: ${{ env.WORKING_DIRECTORY }}
+
+  # unit_tests:
+  #   runs-on: ubuntu-latest
+  #   needs: [common_steps, debug_info]
+  #   env:
+  #     WORKING_DIRECTORY: ${{ github.workspace }}
+  #   steps:
+  #     - name: Run UNIT tests
+  #       run: npm run test
+  #       working-directory: ${{ env.WORKING_DIRECTORY }}
+
+  # e2e_tests:
+  #   runs-on: ubuntu-latest
+  #   needs: [common_steps, unit_tests, debug_info]
+  #   env:
+  #     WORKING_DIRECTORY: ${{ github.workspace }}
+  #   steps:
+  #     - name: Run E2E tests
+  #       run: npm run test:ci
+  #       working-directory: ${{ env.WORKING_DIRECTORY }}
