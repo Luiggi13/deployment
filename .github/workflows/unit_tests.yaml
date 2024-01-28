@@ -1,0 +1,5 @@
+extends: ./.github/common.yml
+
+steps:
+  - name: 🧪 UNIT TEST 🧪
+    run: npm run test:ci

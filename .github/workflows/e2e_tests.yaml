@@ -1,0 +1,5 @@
+extends: ./.github/common.yml
+
+steps:
+  - name: 🧪 E2E 🧪
+    run: npm run test:e2e
