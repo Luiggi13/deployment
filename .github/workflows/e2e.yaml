@@ -26,4 +26,4 @@ jobs:
           echo "BRANCH=${{ inputs.environment }}" >> .env
 
       - name: 🧪 E2E 🧪
-        run: npm run test:e2e
+        run: npm run test:ci
