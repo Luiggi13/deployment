@@ -9,56 +9,39 @@ on:
       - 'main'
 
 jobs:
-  common_steps:
+  unit_tests:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js
         uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
 
-      - name: Install Dependencies
+      - name: 📥 Install Dependencies
         run: npm install
 
-      - name: Set up .env
+      - name: 📥 Set up .env
         run: echo "${{ secrets.ENV_FILE }}" > .env
 
-  debug_info:
+      - name: 🧪 UNIT 🧪
+        run: npm run test:ci
+
+  e2e_tests:
     runs-on: ubuntu-latest
-    needs: common_steps
-    env:
-      WORKING_DIRECTORY: ${{ github.workspace }}
+    needs: [unit_tests]
     steps:
-      - name: Print Working Directory
-        run: echo ${{ env.WORKING_DIRECTORY }}
-        working-directory: ${{ env.WORKING_DIRECTORY }}
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: List Contents of Working Directory
-        run: ls -la
-        working-directory: ${{ env.WORKING_DIRECTORY }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
 
-  # unit_tests:
-  #   runs-on: ubuntu-latest
-  #   needs: [common_steps, debug_info]
-  #   env:
-  #     WORKING_DIRECTORY: ${{ github.workspace }}
-  #   steps:
-  #     - name: Run UNIT tests
-  #       run: npm run test
-  #       working-directory: ${{ env.WORKING_DIRECTORY }}
+      - name: 📥 Install Dependencies
+        run: npm install
 
-  # e2e_tests:
-  #   runs-on: ubuntu-latest
-  #   needs: [common_steps, unit_tests, debug_info]
-  #   env:
-  #     WORKING_DIRECTORY: ${{ github.workspace }}
-  #   steps:
-  #     - name: Run E2E tests
-  #       run: npm run test:ci
-  #       working-directory: ${{ env.WORKING_DIRECTORY }}
+      - name: 📥 Set up .env
+        run: echo "${{ secrets.ENV_FILE }}" > .env
+
+      - name: 🧪 E2E 🧪
+        run: npm run test:e2e
