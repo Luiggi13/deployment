@@ -25,7 +25,8 @@ jobs:
           run: |
             case "${GITHUB_REF#refs/heads/}" in
               "main")
-                $PROJECT_NAME=nest-${GITHUB_REF#refs/heads/}
+                PROJECT_NAME="nest-${GITHUB_REF#refs/heads/}"
+                echo "PROJECT_NAME=$PROJECT_NAME" >> $GITHUB_ENV
                 echo "$PROJECT_NAME"
                 ;;
               "qa")
