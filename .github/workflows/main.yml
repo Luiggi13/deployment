@@ -27,7 +27,7 @@ jobs:
               "main")
                 PROJECT_NAME="nest-${GITHUB_REF#refs/heads/}"
                 echo "PROJECT_NAME=$PROJECT_NAME" >> $GITHUB_ENV
-                echo "$PROJECT_NAME"
+                echo "la variable se llamará $PROJECT_NAME"
                 ;;
               "qa")
                 echo "qa"
