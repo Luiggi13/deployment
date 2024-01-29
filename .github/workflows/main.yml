@@ -6,7 +6,8 @@ on:
   push:
     branches:
       - 'main'
-
+env:
+  PROJECT_NAME: nest
 jobs:
   unit:
     uses: Luiggi13/deployment/.github/workflows/unit.yaml@main
@@ -24,7 +25,8 @@ jobs:
           run: |
             case "${GITHUB_REF#refs/heads/}" in
               "main")
-                echo "production"
+                $PROJECT_NAME=nest-${GITHUB_REF#refs/heads/}
+                echo "$PROJECT_NAME"
                 ;;
               "qa")
                 echo "qa"
