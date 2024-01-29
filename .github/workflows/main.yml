@@ -9,11 +9,11 @@ on:
 
 jobs:
   unit:
-    uses: Luiggi13/deployment/.github/workflows/extensions/unit.yaml@main
+    uses: Luiggi13/deployment/.github/workflows/unit.yaml@main
     with:
       environment: ${GITHUB_REF#refs/heads/}
   e2e:
-    uses: Luiggi13/deployment/.github/workflows/extensions/e2e.yaml@main
+    uses: Luiggi13/deployment/.github/workflows/e2e.yaml@main
     with:
       environment: ${GITHUB_REF#refs/heads/}
   deploy:
