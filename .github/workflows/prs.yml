@@ -1,0 +1,15 @@
+name: Main file
+on:
+  pull_request:
+    branches: ['main' , 'development', 'qa']
+env:
+  PROJECT_NAME: nest
+jobs:
+  unit:
+    uses: Luiggi13/deployment/.github/workflows/unit.yaml@main
+    with:
+      environment: ${GITHUB_REF#refs/heads/}
+  e2e:
+    uses: Luiggi13/deployment/.github/workflows/e2e.yaml@main
+    with:
+      environment: ${GITHUB_REF#refs/heads/}

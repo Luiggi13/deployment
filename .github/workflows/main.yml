@@ -1,11 +1,7 @@
 name: Main file
 on:
-  pull_request:
-    branches:
-      - 'main'
   push:
-    branches:
-      - 'main'
+    branches: ['main' , 'development', 'qa']
 env:
   PROJECT_NAME: nest
 jobs:
